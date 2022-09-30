@@ -1,0 +1,19 @@
+name: Pipeline
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v3
+      - run: python welcome.py
+  build:
+    needs: 
+    runs-on: ubuntu-latest 
+    steps: [test]
+      - uses: actions/checkout@v3
+      - uses: actions/upload-artifact@v3
+          with:
+            name: welcome
+            path: .
